@@ -11,7 +11,8 @@ fetch("https://www.json-generator.com/api/json/get/bVThjHGjtu")
     displayInfo(`data fetched: ${JSON.stringify(data)}`);
     return data;
   })
-  .then(data => data.map(({ t, conso }) => ({ t: new Date(t), y: conso })))
+  .then(data => data.map(({ t, conso }) => ({ x: new Date(t), y: conso })))
+  .then(data => data.sort((d1, d2) => d1.x - d2.x))
   .then(data => {
     displayInfo(`data formated: ${JSON.stringify(data)}`);
     return data;
@@ -20,21 +21,34 @@ fetch("https://www.json-generator.com/api/json/get/bVThjHGjtu")
     const ctx = "myChart";
     new Chart(ctx, {
       type: "line",
-      data: [
-        {
-          x: new Date("2018-01-10"),
-          y: 1
-        },
-        {
-          t: new Date("2018-02-03"),
-          y: 10
-        }
-      ],
+      data: {
+        datasets: [
+          {
+            label: "My First dataset",
+            data: formattedData
+          }
+        ]
+      },
       options: {
         scales: {
           xAxes: [
             {
-              type: "time"
+              type: "time",
+              time: {
+                format: "yyyy MM dd"
+              },
+              scaleLabel: {
+                display: true,
+                labelString: "Date"
+              }
+            }
+          ],
+          yAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: "value"
+              }
             }
           ]
         }

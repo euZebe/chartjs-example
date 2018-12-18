@@ -1,7 +1,7 @@
 {
-  "name": "parcel-sandbox",
+  "name": "charts.js example",
   "version": "1.0.0",
-  "description": "Simple Parcel Sandbox",
+  "description": "Chart.js example",
   "main": "index.html",
   "scripts": {
     "start": "parcel index.html --open",
